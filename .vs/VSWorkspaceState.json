@@ -1,0 +1,10 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\EmployeeDirectory",
+    "\\EmployeeDirectory.Infra",
+    "\\EmployeeDirectory.Infra\\Persistence"
+  ],
+  "SelectedNode": "\\EmployeeDirectory.Infra\\Persistence\\EmployeeDirectoryDbContext.cs",
+  "PreviewInSolutionExplorer": false
+}
