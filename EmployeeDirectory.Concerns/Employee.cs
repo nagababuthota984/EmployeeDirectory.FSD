@@ -18,6 +18,9 @@ namespace EmployeeDirectory.Concerns
         [ForeignKey("Department")]
         public int DepartmentId { get; set; }
         public virtual Department Department { get; set; }
+        [ForeignKey("JobTitle")]
+        public int JobTitleId { get; set; }
+        public virtual JobTitle JobTitle { get; set; }
         public decimal Salary { get; set; }
     }
 }

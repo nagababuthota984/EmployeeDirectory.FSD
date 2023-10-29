@@ -8,6 +8,6 @@ namespace EmployeeDirectory.Concerns.Base
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public virtual int Id { get; set; }
+        public virtual T Id { get; set; }
     }
 }

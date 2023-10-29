@@ -1,8 +1,13 @@
-﻿@{
+﻿@using EmployeeDirectory.Concerns;
+@{
     ViewData["Title"] = "Employee";
 }
 <div class="text-center">
+    @{
+        var employee = ViewData["Employee"] as Employee;
+    }
     <h1 class="display-4">Welcome</h1>
-    <h2 class="display-1">Nagababu Thota</h2>
+    <h2 class="display-6">@employee.FirstName</h2>
+    <h2 class="display-7">@employee.LastName</h2>
 </div>
 

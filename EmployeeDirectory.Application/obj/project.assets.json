@@ -1,30 +1,49 @@
 {
   "version": 3,
   "targets": {
-    "net7.0": {}
+    "net7.0": {
+      "EmployeeDirectory.Concerns/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v7.0",
+        "compile": {
+          "bin/placeholder/EmployeeDirectory.Concerns.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/EmployeeDirectory.Concerns.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "EmployeeDirectory.Concerns/1.0.0": {
+      "type": "project",
+      "path": "../EmployeeDirectory.Concerns/EmployeeDirectory.Concerns.csproj",
+      "msbuildProject": "../EmployeeDirectory.Concerns/EmployeeDirectory.Concerns.csproj"
+    }
+  },
   "projectFileDependencyGroups": {
-    "net7.0": []
+    "net7.0": [
+      "EmployeeDirectory.Concerns >= 1.0.0"
+    ]
   },
   "packageFolders": {
-    "C:\\Users\\nagababu.t\\.nuget\\packages\\": {},
+    "C:\\Users\\nagab\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\nagababu.t\\source\\bnsi\\BnsiDB\\EmployeeDirectory.Application\\EmployeeDirectory.Application.csproj",
+      "projectUniqueName": "C:\\Users\\nagab\\source\\learning\\EmployeeDirectory.FSD\\EmployeeDirectory.FSD\\EmployeeDirectory.Application\\EmployeeDirectory.Application.csproj",
       "projectName": "EmployeeDirectory.Application",
-      "projectPath": "C:\\Users\\nagababu.t\\source\\bnsi\\BnsiDB\\EmployeeDirectory.Application\\EmployeeDirectory.Application.csproj",
-      "packagesPath": "C:\\Users\\nagababu.t\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\nagababu.t\\source\\bnsi\\BnsiDB\\EmployeeDirectory.Application\\obj\\",
+      "projectPath": "C:\\Users\\nagab\\source\\learning\\EmployeeDirectory.FSD\\EmployeeDirectory.FSD\\EmployeeDirectory.Application\\EmployeeDirectory.Application.csproj",
+      "packagesPath": "C:\\Users\\nagab\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\nagab\\source\\learning\\EmployeeDirectory.FSD\\EmployeeDirectory.FSD\\EmployeeDirectory.Application\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\nagababu.t\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\nagab\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -39,7 +58,11 @@
       "frameworks": {
         "net7.0": {
           "targetAlias": "net7.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\nagab\\source\\learning\\EmployeeDirectory.FSD\\EmployeeDirectory.FSD\\EmployeeDirectory.Concerns\\EmployeeDirectory.Concerns.csproj": {
+              "projectPath": "C:\\Users\\nagab\\source\\learning\\EmployeeDirectory.FSD\\EmployeeDirectory.FSD\\EmployeeDirectory.Concerns\\EmployeeDirectory.Concerns.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
@@ -67,7 +90,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
       }
     }
   }

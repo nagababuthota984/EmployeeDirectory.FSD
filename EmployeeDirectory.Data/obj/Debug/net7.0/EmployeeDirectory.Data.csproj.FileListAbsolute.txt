@@ -1,0 +1,17 @@
+C:\Users\nagab\source\learning\EmployeeDirectory.FSD\EmployeeDirectory.FSD\EmployeeDirectory.Data\bin\Debug\net7.0\EmployeeDirectory.Data.deps.json
+C:\Users\nagab\source\learning\EmployeeDirectory.FSD\EmployeeDirectory.FSD\EmployeeDirectory.Data\bin\Debug\net7.0\EmployeeDirectory.Data.runtimeconfig.json
+C:\Users\nagab\source\learning\EmployeeDirectory.FSD\EmployeeDirectory.FSD\EmployeeDirectory.Data\bin\Debug\net7.0\EmployeeDirectory.Data.dll
+C:\Users\nagab\source\learning\EmployeeDirectory.FSD\EmployeeDirectory.FSD\EmployeeDirectory.Data\bin\Debug\net7.0\EmployeeDirectory.Data.pdb
+C:\Users\nagab\source\learning\EmployeeDirectory.FSD\EmployeeDirectory.FSD\EmployeeDirectory.Data\bin\Debug\net7.0\EmployeeDirectory.Concerns.dll
+C:\Users\nagab\source\learning\EmployeeDirectory.FSD\EmployeeDirectory.FSD\EmployeeDirectory.Data\bin\Debug\net7.0\EmployeeDirectory.Concerns.pdb
+C:\Users\nagab\source\learning\EmployeeDirectory.FSD\EmployeeDirectory.FSD\EmployeeDirectory.Data\obj\Debug\net7.0\EmployeeDirectory.Data.csproj.AssemblyReference.cache
+C:\Users\nagab\source\learning\EmployeeDirectory.FSD\EmployeeDirectory.FSD\EmployeeDirectory.Data\obj\Debug\net7.0\EmployeeDirectory.Data.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\nagab\source\learning\EmployeeDirectory.FSD\EmployeeDirectory.FSD\EmployeeDirectory.Data\obj\Debug\net7.0\EmployeeDirectory.Data.AssemblyInfoInputs.cache
+C:\Users\nagab\source\learning\EmployeeDirectory.FSD\EmployeeDirectory.FSD\EmployeeDirectory.Data\obj\Debug\net7.0\EmployeeDirectory.Data.AssemblyInfo.cs
+C:\Users\nagab\source\learning\EmployeeDirectory.FSD\EmployeeDirectory.FSD\EmployeeDirectory.Data\obj\Debug\net7.0\EmployeeDirectory.Data.csproj.CoreCompileInputs.cache
+C:\Users\nagab\source\learning\EmployeeDirectory.FSD\EmployeeDirectory.FSD\EmployeeDirectory.Data\obj\Debug\net7.0\EmployeeDirectory.Data.csproj.CopyComplete
+C:\Users\nagab\source\learning\EmployeeDirectory.FSD\EmployeeDirectory.FSD\EmployeeDirectory.Data\obj\Debug\net7.0\EmployeeDirectory.Data.dll
+C:\Users\nagab\source\learning\EmployeeDirectory.FSD\EmployeeDirectory.FSD\EmployeeDirectory.Data\obj\Debug\net7.0\refint\EmployeeDirectory.Data.dll
+C:\Users\nagab\source\learning\EmployeeDirectory.FSD\EmployeeDirectory.FSD\EmployeeDirectory.Data\obj\Debug\net7.0\EmployeeDirectory.Data.pdb
+C:\Users\nagab\source\learning\EmployeeDirectory.FSD\EmployeeDirectory.FSD\EmployeeDirectory.Data\obj\Debug\net7.0\EmployeeDirectory.Data.genruntimeconfig.cache
+C:\Users\nagab\source\learning\EmployeeDirectory.FSD\EmployeeDirectory.FSD\EmployeeDirectory.Data\obj\Debug\net7.0\ref\EmployeeDirectory.Data.dll
