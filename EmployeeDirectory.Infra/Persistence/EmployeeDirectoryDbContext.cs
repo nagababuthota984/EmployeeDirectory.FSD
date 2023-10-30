@@ -26,12 +26,15 @@ namespace EmployeeDirectory.Infra.Persistence
         {
                               
             modelBuilder.Entity<Department>()
+                        .ToTable("Departments")
                         .HasDiscriminator<string>("dept_type")
                         .HasValue<Department>("dept_data_concern");
             modelBuilder.Entity<Office>()
+                        .ToTable("Offices")
                         .HasDiscriminator<string>("office_type")
                         .HasValue<Office>("office_data_concernt");
             modelBuilder.Entity<JobTitle>()
+                        .ToTable("JobTitles")
                         .HasDiscriminator<string>("jobtitle_type")
                         .HasValue<JobTitle>("jobtitle_data_concern");
             modelBuilder.Entity<JobTitle>().HasData(new JobTitle
