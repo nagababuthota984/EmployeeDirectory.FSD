@@ -3,17 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34003.232
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeeDirectory", "EmployeeDirectory.csproj", "{28DE87E6-7B77-48AE-9567-A6E3332EEA07}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeeDirectory", "EmployeeDirectory\EmployeeDirectory.csproj", "{28DE87E6-7B77-48AE-9567-A6E3332EEA07}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeeDirectory.Concerns", "..\EmployeeDirectory.Concerns\EmployeeDirectory.Concerns.csproj", "{40BD528A-5C38-4AEC-8D00-6C696BB806E6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeeDirectory.Concerns", "EmployeeDirectory.Concerns\EmployeeDirectory.Concerns.csproj", "{40BD528A-5C38-4AEC-8D00-6C696BB806E6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeeDirectory.Data", "..\EmployeeDirectory.Data\EmployeeDirectory.Data.csproj", "{D2526707-8F5A-4EC8-9E17-AF5ED410ADDB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeeDirectory.Data", "EmployeeDirectory.Data\EmployeeDirectory.Data.csproj", "{D2526707-8F5A-4EC8-9E17-AF5ED410ADDB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeeDirectory.Domain", "..\EmployeeDirectory.Domain\EmployeeDirectory.Domain.csproj", "{591B90A1-6483-4785-B44E-A11EA4619D5A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeeDirectory.Domain", "EmployeeDirectory.Domain\EmployeeDirectory.Domain.csproj", "{591B90A1-6483-4785-B44E-A11EA4619D5A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeeDirectory.Application", "..\EmployeeDirectory.Application\EmployeeDirectory.Application.csproj", "{AC44D723-0DFE-4DC6-9082-641BCA0AD74F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeeDirectory.Application", "EmployeeDirectory.Application\EmployeeDirectory.Application.csproj", "{AC44D723-0DFE-4DC6-9082-641BCA0AD74F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeeDirectory.Infra", "..\EmployeeDirectory.Infra\EmployeeDirectory.Infra.csproj", "{5037C766-1019-4282-9AB4-52A610BAB259}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeeDirectory.Infra", "EmployeeDirectory.Infra\EmployeeDirectory.Infra.csproj", "{5037C766-1019-4282-9AB4-52A610BAB259}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
