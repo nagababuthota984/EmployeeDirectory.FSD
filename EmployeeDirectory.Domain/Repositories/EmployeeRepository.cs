@@ -1,21 +1,19 @@
 ﻿using EmployeeDirectory.Application.Contracts;
 using EmployeeDirectory.Data.DataConcerns;
-using EmployeeDirectory.Infra.Persistence;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace EmployeeDirectory.Domain.Repositories
 {
     public class EmployeeRepository : IRepository<Employee>
     {
-        private readonly EmployeeDirectoryDbContext _dbContext;
-        public EmployeeRepository(EmployeeDirectoryDbContext dbContext)
+        private readonly IApplicationDbContext _dbContext;
+        public EmployeeRepository(IApplicationDbContext dbContext)
         {
             _dbContext = dbContext;
         }
         public async Task<int> AddAsync(Employee entity)
         {
             await _dbContext.Employees.AddAsync(entity);
-            await _dbContext.SaveChangesAsync();
+            await _dbContext.SaveContextChangesAsync();
             return entity.Id;
         }
         public async Task<bool> DeleteAsync(Employee entity)
@@ -23,7 +21,7 @@ namespace EmployeeDirectory.Domain.Repositories
             try
             {
                 _dbContext.Employees.Remove(entity);
-                await _dbContext.SaveChangesAsync();
+                await _dbContext.SaveContextChangesAsync();
                 return true;
             }
             catch
@@ -45,7 +43,7 @@ namespace EmployeeDirectory.Domain.Repositories
         public async Task<int> UpdateAsync(Employee entity)
         {
             _dbContext.Employees.Update(entity);
-            await _dbContext.SaveChangesAsync();
+            await _dbContext.SaveContextChangesAsync();
             return entity.Id;
         }
     }

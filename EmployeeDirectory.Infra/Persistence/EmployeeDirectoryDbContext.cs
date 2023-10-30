@@ -1,11 +1,11 @@
 ﻿
+using EmployeeDirectory.Application.Contracts;
 using EmployeeDirectory.Data.DataConcerns;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 
 namespace EmployeeDirectory.Infra.Persistence
 {
-    public class EmployeeDirectoryDbContext : DbContext
+    public class EmployeeDirectoryDbContext : DbContext, IApplicationDbContext
     {
         public EmployeeDirectoryDbContext(DbContextOptions<EmployeeDirectoryDbContext> options) : base(options)
         {
@@ -17,8 +17,14 @@ namespace EmployeeDirectory.Infra.Persistence
         public DbSet<Office> Offices { get; set; }
         public DbSet<JobTitle> JobTitles { get; set; }
 
+        public async Task<int> SaveContextChangesAsync()
+        {
+            return await this.SaveChangesAsync();
+        }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+                              
             modelBuilder.Entity<Department>()
                         .HasDiscriminator<string>("dept_type")
                         .HasValue<Department>("dept_data_concern");

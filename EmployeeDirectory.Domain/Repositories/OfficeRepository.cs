@@ -7,8 +7,8 @@ namespace EmployeeDirectory.Domain.Repositories
 {
     public class OfficeRepository : IRepository<Office>
     {
-        private readonly EmployeeDirectoryDbContext _dbContext;
-        public OfficeRepository(EmployeeDirectoryDbContext dbContext)
+        private readonly IApplicationDbContext _dbContext;
+        public OfficeRepository(IApplicationDbContext dbContext)
         {
             _dbContext = dbContext;
         }
@@ -16,7 +16,7 @@ namespace EmployeeDirectory.Domain.Repositories
         public async Task<int> AddAsync(Office entity)
         {
             await _dbContext.Offices.AddAsync(entity);
-            await _dbContext.SaveChangesAsync();
+            await _dbContext.SaveContextChangesAsync();
             return entity.Id;
         }
 
@@ -25,7 +25,7 @@ namespace EmployeeDirectory.Domain.Repositories
             try
             {
                 _dbContext.Offices.Remove(entity);
-                await _dbContext.SaveChangesAsync();
+                await _dbContext.SaveContextChangesAsync();
                 return true;
             }
             catch
@@ -47,7 +47,7 @@ namespace EmployeeDirectory.Domain.Repositories
         public async Task<int> UpdateAsync(Office entity)
         {
             _dbContext.Offices.Update(entity);
-            await _dbContext.SaveChangesAsync();
+            await _dbContext.SaveContextChangesAsync();
             return entity.Id;   
         }
     }

@@ -1,20 +1,19 @@
 ﻿using EmployeeDirectory.Application.Contracts;
 using EmployeeDirectory.Data.DataConcerns;
-using EmployeeDirectory.Infra.Persistence;
 
 namespace EmployeeDirectory.Domain.Repositories
 {
     public class JobTitleRepository : IRepository<JobTitle>
     {
-        private readonly EmployeeDirectoryDbContext _dbContext;
-        public JobTitleRepository(EmployeeDirectoryDbContext dbContext)
+        private readonly IApplicationDbContext _dbContext;
+        public JobTitleRepository(IApplicationDbContext dbContext)
         {
             _dbContext = dbContext;
         }
         public async Task<int> AddAsync(JobTitle entity)
         {
             await _dbContext.JobTitles.AddAsync(entity);
-            await _dbContext.SaveChangesAsync();    
+            await _dbContext.SaveContextChangesAsync();    
             return entity.Id;
         }
 
@@ -23,7 +22,7 @@ namespace EmployeeDirectory.Domain.Repositories
             try
             {
                 _dbContext.JobTitles.Remove(entity);
-                await _dbContext.SaveChangesAsync();
+                await _dbContext.SaveContextChangesAsync();
                 return true;
             }
             catch
@@ -45,7 +44,7 @@ namespace EmployeeDirectory.Domain.Repositories
         public async Task<int> UpdateAsync(JobTitle entity)
         {
             _dbContext.JobTitles.Update(entity);
-            await _dbContext.SaveChangesAsync();
+            await _dbContext.SaveContextChangesAsync();
             return entity.Id;
         }
     }

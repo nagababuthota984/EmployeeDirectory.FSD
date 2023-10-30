@@ -8,8 +8,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\EmployeeDirectory.Application\EmployeeDirectory.Application.csproj" />
-    <ProjectReference Include="..\EmployeeDirectory.Data\EmployeeDirectory.Data.csproj" />
-    <ProjectReference Include="..\EmployeeDirectory.Infra\EmployeeDirectory.Infra.csproj" />
   </ItemGroup>
 
 </Project>
