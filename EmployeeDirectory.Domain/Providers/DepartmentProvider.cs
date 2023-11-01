@@ -1,34 +1,42 @@
 ﻿
 using EmployeeDirectory.Application.Contracts;
 using EmployeeDirectory.Concerns;
+using Mapster;
 
 namespace EmployeeDirectory.Domain.Providers
 {
     public class DepartmentProvider : IDepartmentProvider
     {
-        public int AddDepartmentAsync(Department department)
+        private readonly IRepository<Data.DataConcerns.Department> _departmentRepository;
+        public DepartmentProvider(IRepository<Data.DataConcerns.Department> deptRepository)
         {
-            throw new NotImplementedException();
+            _departmentRepository = deptRepository;
         }
 
-        public bool DeleteDepartmentAsync(int id)
+        public async Task<int> AddDepartmentAsync(Department department)
         {
-            throw new NotImplementedException();
+            Data.DataConcerns.Department entity = department.Adapt<Data.DataConcerns.Department>();
+            return await _departmentRepository.AddAsync(entity);
         }
 
-        public List<Department> GetAllDepartmentsAsync()
+        public async Task<bool> DeleteDepartmentAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _departmentRepository.DeleteAsync(await _departmentRepository.GetByIdAsync(id));
         }
 
-        public Department GetDepartmentByIdAsync(int id)
+        public async Task<List<Department>> GetAllDepartmentsAsync()
         {
-            throw new NotImplementedException();
+            return (await _departmentRepository.GetAllAsync()).Cast<Department>().ToList();
         }
 
-        public int UpdateDepartmentAsync(Department department)
+        public async Task<Department> GetDepartmentByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return (await _departmentRepository.GetByIdAsync(id)).Adapt<Department>();
+        }
+
+        public async Task<int> UpdateDepartmentAsync(Department department)
+        {
+            return await _departmentRepository.UpdateAsync(department.Adapt<Data.DataConcerns.Department>());
         }
     }
 }

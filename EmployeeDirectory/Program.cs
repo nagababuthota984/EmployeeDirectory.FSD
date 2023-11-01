@@ -1,7 +1,11 @@
 using EmployeeDirectory.Application.Contracts;
+using EmployeeDirectory.Data.DataConcerns;
 using EmployeeDirectory.Domain.Providers;
 using EmployeeDirectory.Domain.Repositories;
 using EmployeeDirectory.Infra.Extensions;
+using Mapster;
+using MapsterMapper;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,13 +16,24 @@ IConfigurationRoot configuration = new ConfigurationBuilder()
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+//mapster
+var typeAdapterConfig = TypeAdapterConfig.GlobalSettings;
+typeAdapterConfig.Scan(Assembly.GetExecutingAssembly());
+var mapperConfig = new Mapper(typeAdapterConfig);
+builder.Services.AddSingleton<IMapper>(mapperConfig);
+
 builder.Services.ConfigureDbContext(configuration);
-builder.Services.AddScoped<EmployeeRepository>();
-builder.Services.AddScoped<DepartmentRepository>();
-builder.Services.AddScoped<JobTitleRepository>();
-builder.Services.AddScoped<OfficeRepository>();
+
+builder.Services.AddScoped<IRepository<Employee>, EmployeeRepository>();
+builder.Services.AddScoped<IRepository<Department>, DepartmentRepository>();
+builder.Services.AddScoped<IRepository<JobTitle>, JobTitleRepository>();
+builder.Services.AddScoped<IRepository<Office>, OfficeRepository>();
 
 builder.Services.AddTransient<IEmployeeProvider, EmployeeProvider>();
+builder.Services.AddTransient<IDepartmentProvider, DepartmentProvider>();
+builder.Services.AddTransient<IOfficeProvider, OfficeProvider>();
+builder.Services.AddTransient<IJobTitleProvider, JobTitleProvider>();
 
 
 var app = builder.Build();

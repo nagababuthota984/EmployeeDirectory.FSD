@@ -2,54 +2,39 @@
 using EmployeeDirectory.Application.Contracts;
 using EmployeeDirectory.Concerns;
 using EmployeeDirectory.Domain.Repositories;
+using Mapster;
+using MapsterMapper;
+using System.Collections.Immutable;
 
 namespace EmployeeDirectory.Domain.Providers
 {
     public class EmployeeProvider : IEmployeeProvider
     {
-        private readonly EmployeeRepository _empRepository;
-        private readonly DepartmentRepository _deptRepository;
-        private readonly OfficeRepository _officeRepository;
-        private readonly JobTitleRepository _jobTitleRepository;
-        public EmployeeProvider(EmployeeRepository employeeRepository, DepartmentRepository deptRepository, OfficeRepository officeRepository, JobTitleRepository jobTitleRepository)
+        private readonly IRepository<Data.DataConcerns.Employee> _empRepository;
+        private readonly IMapper _mapper;
+
+        public EmployeeProvider(IMapper mapper, IRepository<Data.DataConcerns.Employee> employeeRepository)
         {
             _empRepository = employeeRepository;
-            _deptRepository = deptRepository;
-            _officeRepository = officeRepository;
-            _jobTitleRepository = jobTitleRepository;
         }
         public async Task<int> AddEmployeeAsync(Employee employee)
         {
-
-            //_empRepository.AddAsync(employee);
-            return 1;
+            return await _empRepository.AddAsync(employee.Adapt<Data.DataConcerns.Employee>());
         }
 
-        public Task<bool> DeleteEmployeeAsync(int id)
+        public async Task<bool> DeleteEmployeeAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _empRepository.DeleteAsync(await _empRepository.GetByIdAsync(id));
         }
 
         public async Task<List<Employee>> GetAllEmployeesAsync()
         {
-            return _empRepository.GetAllAsync().Result.Cast<Concerns.Employee>().ToList();
+            return (await _empRepository.GetAllAsync()).AsQueryable().ProjectToType<Employee>().ToList();
         }
 
         public async Task<Employee> GetEmployeeByIdAsync(int id)
         {
-            var x = await _empRepository.GetByIdAsync(id);
-            Concerns.Employee emp = new Concerns.Employee
-            {
-                Id = x.Id,
-                FirstName = x.FirstName,
-                LastName = x.LastName,
-                PreferredName = x.PreferredName,
-                Phone = x.Phone,
-                JobTitle = x.JobTitle,
-                Office = x.Office,
-                Department = x.Department,
-            };
-            return emp;
+            return (await _empRepository.GetByIdAsync(id)).Adapt<Employee>();
         }
 
         public Task<List<Employee>> GetEmployeesByDepartmentAsync()
@@ -60,16 +45,18 @@ namespace EmployeeDirectory.Domain.Providers
         public Task<List<Employee>> GetEmployeesByJobTitlesAsync()
         {
             throw new NotImplementedException();
+
         }
 
         public Task<List<Employee>> GetEmployeesByOfficeAsync()
         {
             throw new NotImplementedException();
+
         }
 
-        public Task<int> UpdateEmployeeAsync(Employee employee)
+        public async Task<int> UpdateEmployeeAsync(Employee employee)
         {
-            throw new NotImplementedException();
+            return await _empRepository.UpdateAsync(employee.Adapt<Data.DataConcerns.Employee>());
         }
     }
 }

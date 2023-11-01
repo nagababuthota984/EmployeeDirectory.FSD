@@ -1,4 +1,5 @@
 ﻿using EmployeeDirectory.Application.Contracts;
+using EmployeeDirectory.Concerns;
 using EmployeeDirectory.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
@@ -28,19 +29,8 @@ namespace EmployeeDirectory.Controllers
 
         public async Task<IActionResult> Employee()
         {
-            Concerns.Employee emp = await _employeeProvider.GetEmployeeByIdAsync(1);
-            EmployeeModel model = new EmployeeModel
-            {
-                Id = emp.Id,
-                FirstName = emp.FirstName,
-                LastName = emp.LastName,
-                PreferredName = emp.PreferredName,
-                JobTitle = emp.JobTitle,
-                Department = emp.Department,
-                Office = emp.Office,
-            };
-            ViewData["Employee"] = emp;
-            return View();
+            IEnumerable<Employee> employees = await _employeeProvider.GetAllEmployeesAsync();
+            return View(employees);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

@@ -4,10 +4,10 @@ namespace EmployeeDirectory.Application.Contracts
 {
     public interface IDepartmentProvider
     {
-        Department GetDepartmentByIdAsync(int id);
-        List<Department> GetAllDepartmentsAsync();
-        int AddDepartmentAsync(Department department);
-        int UpdateDepartmentAsync(Department department);
-        bool DeleteDepartmentAsync(int id);
+        Task<Department> GetDepartmentByIdAsync(int id);
+        Task<List<Department>> GetAllDepartmentsAsync();
+        Task<int> AddDepartmentAsync(Department department);
+        Task<int> UpdateDepartmentAsync(Department department);
+        Task<bool> DeleteDepartmentAsync(int id);
     }
 }

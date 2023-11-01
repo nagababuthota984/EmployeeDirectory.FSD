@@ -1,5 +1,7 @@
 ﻿using EmployeeDirectory.Application.Contracts;
+using EmployeeDirectory.Data.Contracts;
 using EmployeeDirectory.Data.DataConcerns;
+using Microsoft.EntityFrameworkCore;
 
 namespace EmployeeDirectory.Domain.Repositories
 {
@@ -12,6 +14,11 @@ namespace EmployeeDirectory.Domain.Repositories
         }
         public async Task<int> AddAsync(Employee entity)
         {
+            if(entity is IAuditable)
+            {
+                entity.CreatedBy = "System";
+                entity.CreatedOn = DateTime.UtcNow;
+            }
             await _dbContext.Employees.AddAsync(entity);
             await _dbContext.SaveContextChangesAsync();
             return entity.Id;
@@ -20,7 +27,12 @@ namespace EmployeeDirectory.Domain.Repositories
         {
             try
             {
-                _dbContext.Employees.Remove(entity);
+                if (entity is IAuditable)
+                {
+                    entity.ModifiedBy = "System";
+                    entity.ModifiedOn = DateTime.UtcNow;
+                }
+                entity.IsDeleted = true;
                 await _dbContext.SaveContextChangesAsync();
                 return true;
             }
@@ -32,7 +44,7 @@ namespace EmployeeDirectory.Domain.Repositories
 
         public async Task<List<Employee>> GetAllAsync()
         {
-            return _dbContext.Employees.ToList();
+            return _dbContext.Employees.Include(e=>e.Department).Include(e=>e.Office).Include(e=>e.JobTitle).ToList();  
         }
 
         public async Task<Employee> GetByIdAsync(int id)
@@ -42,6 +54,11 @@ namespace EmployeeDirectory.Domain.Repositories
 
         public async Task<int> UpdateAsync(Employee entity)
         {
+            if (entity is IAuditable)
+            {
+                entity.ModifiedBy = "System";
+                entity.ModifiedOn = DateTime.UtcNow;
+            }
             _dbContext.Employees.Update(entity);
             await _dbContext.SaveContextChangesAsync();
             return entity.Id;

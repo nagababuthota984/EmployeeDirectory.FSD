@@ -1,11 +1,10 @@
 ﻿
-using EmployeeDirectory.Concerns.Base;
-
 namespace EmployeeDirectory.Concerns
 {
-    public class JobTitle : BaseEntity<int>
+    public class JobTitle
     {
-        public string Name { get; set; }
+        public int Id { get; set; }
+        public string Title { get; set; }
         public string Description { get; set; }
 
     }

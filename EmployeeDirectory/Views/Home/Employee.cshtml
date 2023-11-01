@@ -1,13 +1,50 @@
 ﻿@using EmployeeDirectory.Concerns;
-@{
-    ViewData["Title"] = "Employee";
-}
-<div class="text-center">
-    @{
-        var employee = ViewData["Employee"] as Employee;
-    }
-    <h1 class="display-4">Welcome</h1>
-    <h2 class="display-6">@employee.FirstName</h2>
-    <h2 class="display-7">@employee.LastName</h2>
-</div>
+@model List<Employee>
 
+@{
+    ViewData["Title"] = "Employees";
+}
+
+<style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    th, td {
+        border: 1px solid black;
+        padding: 8px;
+    }
+
+    th {
+        background-color: #ccc;
+    }
+</style>
+
+<table>
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Preferred Name</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Job Title</th>
+            <th>Department</th>
+            <th>Office</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var employee in Model)
+        {
+            <tr>
+                <td>@employee.Id</td>
+                <td>@employee.PreferredName</td>
+                <td>@employee.FirstName</td>
+                <td>@employee.LastName</td>
+                <td>@employee.JobTitle?.Title</td>
+                <td>@employee.Department?.Name</td>
+                <td>@employee.Office?.Name</td>
+            </tr>
+        }
+    </tbody>
+</table>

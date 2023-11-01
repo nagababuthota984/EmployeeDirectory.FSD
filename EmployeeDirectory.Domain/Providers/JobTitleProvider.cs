@@ -1,34 +1,40 @@
 ﻿
 using EmployeeDirectory.Application.Contracts;
 using EmployeeDirectory.Concerns;
+using Mapster;
 
 namespace EmployeeDirectory.Domain.Providers
 {
     public class JobTitleProvider : IJobTitleProvider
     {
-        public int AddJobTitleAsync(JobTitle jobTitle)
+        private readonly IRepository<Data.DataConcerns.JobTitle> _repository;
+        public JobTitleProvider(IRepository<Data.DataConcerns.JobTitle> repository)
         {
-            throw new NotImplementedException();
+            _repository = repository;
+        }
+        public async Task<int> AddJobTitleAsync(JobTitle jobTitle)
+        {
+            return await _repository.AddAsync(jobTitle.Adapt<Data.DataConcerns.JobTitle>());
         }
 
-        public bool DeleteJobTitleAsync(int id)
+        public async Task<bool> DeleteJobTitleAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _repository.DeleteAsync(await _repository.GetByIdAsync(id));
         }
 
-        public List<JobTitle> GetAllJobTitlesAsync()
+        public async Task<List<JobTitle>> GetAllJobTitlesAsync()
         {
-            throw new NotImplementedException();
+            return (await _repository.GetAllAsync()).Cast<JobTitle>().ToList();
         }
 
-        public JobTitle GetJobTitleByIdAsync(int id)
+        public async Task<JobTitle> GetJobTitleByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return (await _repository.GetByIdAsync(id)).Adapt<JobTitle>();
         }
 
-        public int UpdateJobTitleAsync(JobTitle jobTitle)
+        public async Task<int> UpdateJobTitleAsync(JobTitle jobTitle)
         {
-            throw new NotImplementedException();
+            return await _repository.UpdateAsync(jobTitle.Adapt<Data.DataConcerns.JobTitle>());
         }
     }
 }

@@ -1,34 +1,40 @@
 ﻿
 using EmployeeDirectory.Application.Contracts;
 using EmployeeDirectory.Concerns;
+using Mapster;
 
 namespace EmployeeDirectory.Domain.Providers
 {
     public class OfficeProvider : IOfficeProvider
     {
-        public Task<int> AddOfficeAsync(Office office)
+        private readonly IRepository<Data.DataConcerns.Office> _repository;
+        public OfficeProvider(IRepository<Data.DataConcerns.Office> repository)
         {
-            throw new NotImplementedException();
+            _repository = repository;
+        }
+        public async Task<int> AddOfficeAsync(Office office)
+        {
+            return await _repository.AddAsync(office.Adapt<Data.DataConcerns.Office>());
         }
 
-        public Task<bool> DeleteOfficeAsync(int id)
+        public async Task<bool> DeleteOfficeAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _repository.DeleteAsync(await _repository.GetByIdAsync(id));
         }
 
-        public Task<List<Office>> GetAllOfficesAsync()
+        public async Task<List<Office>> GetAllOfficesAsync()
         {
-            throw new NotImplementedException();
+            return (await _repository.GetAllAsync()).Cast<Office>().ToList();
         }
 
-        public Task<Office> GetOfficeByIdAsync(int id)
+        public async Task<Office> GetOfficeByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return (await _repository.GetByIdAsync(id)).Adapt<Office>();
         }
 
-        public Task<int> UpdateOfficeAsync(Office office)
+        public async Task<int> UpdateOfficeAsync(Office office)
         {
-            throw new NotImplementedException();
+            return await _repository.UpdateAsync(office.Adapt<Data.DataConcerns.Office>());
         }
     }
 }

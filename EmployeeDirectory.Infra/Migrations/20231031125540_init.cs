@@ -7,51 +7,51 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace EmployeeDirectory.Infra.Migrations
 {
     /// <inheritdoc />
-    public partial class initial : Migration
+    public partial class init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Department",
+                name: "Departments",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Name = table.Column<string>(type: "text", nullable: false),
                     Description = table.Column<string>(type: "text", nullable: false),
-                    dept_type = table.Column<string>(type: "text", nullable: false),
-                    CreatedOn = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    CreatedBy = table.Column<string>(type: "text", nullable: true),
-                    ModifiedOn = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    ModifiedBy = table.Column<string>(type: "text", nullable: true)
+                    CreatedOn = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    CreatedBy = table.Column<string>(type: "text", nullable: false),
+                    ModifiedOn = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    ModifiedBy = table.Column<string>(type: "text", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Department", x => x.Id);
+                    table.PrimaryKey("PK_Departments", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "JobTitle",
+                name: "JobTitles",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Name = table.Column<string>(type: "text", nullable: false),
+                    Title = table.Column<string>(type: "text", nullable: false),
                     Description = table.Column<string>(type: "text", nullable: false),
-                    jobtitle_type = table.Column<string>(type: "text", nullable: false),
-                    CreatedOn = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    CreatedBy = table.Column<string>(type: "text", nullable: true),
-                    ModifiedOn = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    ModifiedBy = table.Column<string>(type: "text", nullable: true)
+                    CreatedOn = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    CreatedBy = table.Column<string>(type: "text", nullable: false),
+                    ModifiedOn = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    ModifiedBy = table.Column<string>(type: "text", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_JobTitle", x => x.Id);
+                    table.PrimaryKey("PK_JobTitles", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Office",
+                name: "Offices",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
@@ -59,15 +59,15 @@ namespace EmployeeDirectory.Infra.Migrations
                     Name = table.Column<string>(type: "text", nullable: false),
                     Location = table.Column<string>(type: "text", nullable: false),
                     Description = table.Column<string>(type: "text", nullable: false),
-                    office_type = table.Column<string>(type: "text", nullable: false),
-                    CreatedOn = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    CreatedBy = table.Column<string>(type: "text", nullable: true),
-                    ModifiedOn = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    ModifiedBy = table.Column<string>(type: "text", nullable: true)
+                    CreatedOn = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    CreatedBy = table.Column<string>(type: "text", nullable: false),
+                    ModifiedOn = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    ModifiedBy = table.Column<string>(type: "text", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Office", x => x.Id);
+                    table.PrimaryKey("PK_Offices", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -76,10 +76,6 @@ namespace EmployeeDirectory.Infra.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    CreatedOn = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    CreatedBy = table.Column<string>(type: "text", nullable: false),
-                    ModifiedOn = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    ModifiedBy = table.Column<string>(type: "text", nullable: false),
                     FirstName = table.Column<string>(type: "text", nullable: false),
                     LastName = table.Column<string>(type: "text", nullable: false),
                     PreferredName = table.Column<string>(type: "text", nullable: false),
@@ -89,50 +85,54 @@ namespace EmployeeDirectory.Infra.Migrations
                     OfficeId = table.Column<int>(type: "integer", nullable: false),
                     DepartmentId = table.Column<int>(type: "integer", nullable: false),
                     JobTitleId = table.Column<int>(type: "integer", nullable: false),
-                    Salary = table.Column<decimal>(type: "numeric", nullable: false)
+                    Salary = table.Column<decimal>(type: "numeric", nullable: false),
+                    CreatedOn = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    CreatedBy = table.Column<string>(type: "text", nullable: false),
+                    ModifiedOn = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    ModifiedBy = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Employees", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Employees_Department_DepartmentId",
+                        name: "FK_Employees_Departments_DepartmentId",
                         column: x => x.DepartmentId,
-                        principalTable: "Department",
+                        principalTable: "Departments",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Employees_JobTitle_JobTitleId",
+                        name: "FK_Employees_JobTitles_JobTitleId",
                         column: x => x.JobTitleId,
-                        principalTable: "JobTitle",
+                        principalTable: "JobTitles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Employees_Office_OfficeId",
+                        name: "FK_Employees_Offices_OfficeId",
                         column: x => x.OfficeId,
-                        principalTable: "Office",
+                        principalTable: "Offices",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.InsertData(
-                table: "Department",
-                columns: new[] { "Id", "CreatedBy", "CreatedOn", "Description", "ModifiedBy", "ModifiedOn", "Name", "dept_type" },
-                values: new object[] { 1, "System", new DateTime(2023, 10, 29, 6, 17, 13, 339, DateTimeKind.Utc).AddTicks(6797), "Product Engineering", "System", new DateTime(2023, 10, 29, 6, 17, 13, 339, DateTimeKind.Utc).AddTicks(6798), "Product Engineering", "dept_data_concern" });
+                table: "Departments",
+                columns: new[] { "Id", "CreatedBy", "CreatedOn", "Description", "IsDeleted", "ModifiedBy", "ModifiedOn", "Name" },
+                values: new object[] { 1, "System", new DateTime(2023, 10, 31, 12, 55, 40, 672, DateTimeKind.Utc).AddTicks(9877), "Product Engineering", false, "System", new DateTime(2023, 10, 31, 12, 55, 40, 672, DateTimeKind.Utc).AddTicks(9878), "Product Engineering" });
 
             migrationBuilder.InsertData(
-                table: "JobTitle",
-                columns: new[] { "Id", "CreatedBy", "CreatedOn", "Description", "ModifiedBy", "ModifiedOn", "Name", "jobtitle_type" },
-                values: new object[] { 1, "System", new DateTime(2023, 10, 29, 6, 17, 13, 339, DateTimeKind.Utc).AddTicks(6615), "Software developer with more than 1 year of experience.", "System", new DateTime(2023, 10, 29, 6, 17, 13, 339, DateTimeKind.Utc).AddTicks(6619), "Software Developer", "jobtitle_data_concern" });
+                table: "JobTitles",
+                columns: new[] { "Id", "CreatedBy", "CreatedOn", "Description", "IsDeleted", "ModifiedBy", "ModifiedOn", "Title" },
+                values: new object[] { 1, "System", new DateTime(2023, 10, 31, 12, 55, 40, 672, DateTimeKind.Utc).AddTicks(9553), "Software developer with more than 1 year of experience.", false, "System", new DateTime(2023, 10, 31, 12, 55, 40, 672, DateTimeKind.Utc).AddTicks(9559), "Software Developer" });
 
             migrationBuilder.InsertData(
-                table: "Office",
-                columns: new[] { "Id", "CreatedBy", "CreatedOn", "Description", "Location", "ModifiedBy", "ModifiedOn", "Name", "office_type" },
-                values: new object[] { 1, "System", new DateTime(2023, 10, 29, 6, 17, 13, 339, DateTimeKind.Utc).AddTicks(6815), "Tezo digital office. Hyderabad, India.", "India", "System", new DateTime(2023, 10, 29, 6, 17, 13, 339, DateTimeKind.Utc).AddTicks(6816), "India", "office_data_concernt" });
+                table: "Offices",
+                columns: new[] { "Id", "CreatedBy", "CreatedOn", "Description", "IsDeleted", "Location", "ModifiedBy", "ModifiedOn", "Name" },
+                values: new object[] { 1, "System", new DateTime(2023, 10, 31, 12, 55, 40, 672, DateTimeKind.Utc).AddTicks(9896), "Tezo digital office. Hyderabad, India.", false, "India", "System", new DateTime(2023, 10, 31, 12, 55, 40, 672, DateTimeKind.Utc).AddTicks(9898), "India" });
 
             migrationBuilder.InsertData(
                 table: "Employees",
                 columns: new[] { "Id", "CreatedBy", "CreatedOn", "DepartmentId", "Email", "FirstName", "IsDeleted", "JobTitleId", "LastName", "ModifiedBy", "ModifiedOn", "OfficeId", "Phone", "PreferredName", "Salary" },
-                values: new object[] { 1, "System", new DateTime(2023, 10, 29, 6, 17, 13, 339, DateTimeKind.Utc).AddTicks(6849), 1, "nagababuthota593@gmail.com", "Nagababu", false, 1, "Thota", "System", new DateTime(2023, 10, 29, 6, 17, 13, 339, DateTimeKind.Utc).AddTicks(6850), 1, "8464832529", "Nagababu Thota", 59900m });
+                values: new object[] { 1, "System", new DateTime(2023, 10, 31, 12, 55, 40, 672, DateTimeKind.Utc).AddTicks(9911), 1, "s.sahu@gmail.com", "Sanjay", false, 1, "Sahu", "System", new DateTime(2023, 10, 31, 12, 55, 40, 672, DateTimeKind.Utc).AddTicks(9912), 1, "8464832529", "Sanjay Sahu", 59900m });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Employees_DepartmentId",
@@ -157,13 +157,13 @@ namespace EmployeeDirectory.Infra.Migrations
                 name: "Employees");
 
             migrationBuilder.DropTable(
-                name: "Department");
+                name: "Departments");
 
             migrationBuilder.DropTable(
-                name: "JobTitle");
+                name: "JobTitles");
 
             migrationBuilder.DropTable(
-                name: "Office");
+                name: "Offices");
         }
     }
 }

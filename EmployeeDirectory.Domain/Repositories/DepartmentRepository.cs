@@ -1,7 +1,6 @@
-﻿
-using EmployeeDirectory.Application.Contracts;
+﻿using EmployeeDirectory.Application.Contracts;
+using EmployeeDirectory.Data.Contracts;
 using EmployeeDirectory.Data.DataConcerns;
-using EmployeeDirectory.Infra.Persistence;
 
 namespace EmployeeDirectory.Domain.Repositories
 {
@@ -14,6 +13,11 @@ namespace EmployeeDirectory.Domain.Repositories
         }
         public async Task<int> AddAsync(Department entity)
         {
+            if (entity is IAuditable)
+            {
+                entity.CreatedBy = "System";
+                entity.CreatedOn = DateTime.UtcNow;
+            }
             await _dbContext.Departments.AddAsync(entity);
             await _dbContext.SaveContextChangesAsync();
             return entity.Id;
@@ -23,7 +27,12 @@ namespace EmployeeDirectory.Domain.Repositories
         {
             try
             {
-                _dbContext.Departments.Remove(entity);
+                if (entity is IAuditable)
+                {
+                    entity.ModifiedBy = "System";
+                    entity.ModifiedOn = DateTime.UtcNow;
+                }
+                entity.IsDeleted = true;
                 await _dbContext.SaveContextChangesAsync();
                 return true;
             }
@@ -45,6 +54,11 @@ namespace EmployeeDirectory.Domain.Repositories
 
         public async Task<int> UpdateAsync(Department entity)
         {
+            if (entity is IAuditable)
+            {
+                entity.ModifiedBy = "System";
+                entity.ModifiedOn = DateTime.UtcNow;
+            }
             _dbContext.Departments.Update(entity);
             await _dbContext.SaveContextChangesAsync();
             return entity.Id;

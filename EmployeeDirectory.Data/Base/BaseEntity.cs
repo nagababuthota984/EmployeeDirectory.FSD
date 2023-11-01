@@ -2,12 +2,12 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace EmployeeDirectory.Concerns.Base
+namespace EmployeeDirectory.Data.Base
 {
-    public abstract class BaseEntity<T>
+    public class BaseEntity<T>
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public virtual T Id { get; set; }
+        public T Id { get; set; }
     }
 }
