@@ -15,7 +15,7 @@ namespace EmployeeDirectory.Infra.Extensions
             //Ef Core
             services.AddDbContext<IApplicationDbContext,EmployeeDirectoryDbContext>(options => options.UseNpgsql(config.GetConnectionString("Postgres")));
             //Dapper
-            services.AddSingleton<DapperContext>();
+            services.AddSingleton<IDapperContext, DapperContext>();
         }
     }
 }

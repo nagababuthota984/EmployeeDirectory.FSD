@@ -1,6 +1,7 @@
 ﻿
 using EmployeeDirectory.Data.DataConcerns;
 using Microsoft.EntityFrameworkCore;
+using System.Data;
 
 namespace EmployeeDirectory.Application.Contracts
 {
@@ -13,5 +14,9 @@ namespace EmployeeDirectory.Application.Contracts
 
         Task<int> SaveContextChangesAsync();
 
+    }
+    public interface IDapperContext
+    {
+        IDbConnection Connection { get; set; }
     }
 }

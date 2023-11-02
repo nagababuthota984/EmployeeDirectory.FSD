@@ -1,29 +1,29 @@
 ﻿using EmployeeDirectory.Application.Contracts;
 using EmployeeDirectory.Data.Contracts;
 using EmployeeDirectory.Data.DataConcerns;
+using Microsoft.EntityFrameworkCore;
 
-namespace EmployeeDirectory.Domain.Repositories
+namespace EmployeeDirectory.Domain.Repositories.EfCore
 {
-    public class JobTitleRepository : IRepository<JobTitle>
+    public class EmployeeRepository : IRepository<Employee>
     {
         private readonly IApplicationDbContext _dbContext;
-        public JobTitleRepository(IApplicationDbContext dbContext)
+        public EmployeeRepository(IApplicationDbContext dbContext)
         {
             _dbContext = dbContext;
         }
-        public async Task<int> AddAsync(JobTitle entity)
+        public async Task<int> AddAsync(Employee entity)
         {
             if (entity is IAuditable)
             {
                 entity.CreatedBy = "System";
                 entity.CreatedOn = DateTime.UtcNow;
             }
-            await _dbContext.JobTitles.AddAsync(entity);
+            await _dbContext.Employees.AddAsync(entity);
             await _dbContext.SaveContextChangesAsync();
             return entity.Id;
         }
-
-        public async Task<bool> DeleteAsync(JobTitle entity)
+        public async Task<bool> DeleteAsync(Employee entity)
         {
             try
             {
@@ -42,24 +42,24 @@ namespace EmployeeDirectory.Domain.Repositories
             }
         }
 
-        public async Task<List<JobTitle>> GetAllAsync()
+        public async Task<List<Employee>> GetAllAsync()
         {
-            return _dbContext.JobTitles.ToList();
+            return _dbContext.Employees.Include(e => e.Department).Include(e => e.Office).Include(e => e.JobTitle).ToList();
         }
 
-        public async Task<JobTitle> GetByIdAsync(int id)
+        public async Task<Employee> GetByIdAsync(int id)
         {
-            return _dbContext.JobTitles.FirstOrDefault(jobTitle => jobTitle.Id == id);
+            return _dbContext.Employees.FirstOrDefault(emp => emp.Id == id);
         }
 
-        public async Task<int> UpdateAsync(JobTitle entity)
+        public async Task<int> UpdateAsync(Employee entity)
         {
             if (entity is IAuditable)
             {
                 entity.ModifiedBy = "System";
                 entity.ModifiedOn = DateTime.UtcNow;
             }
-            _dbContext.JobTitles.Update(entity);
+            _dbContext.Employees.Update(entity);
             await _dbContext.SaveContextChangesAsync();
             return entity.Id;
         }

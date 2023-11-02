@@ -1,5 +1,5 @@
 ﻿
-namespace EmployeeDirectory.Infra.Common
+namespace EmployeeDirectory.Data
 {
     public class Enums
     {

@@ -7,6 +7,7 @@ using EmployeeDirectory.Infra.Extensions;
 using Mapster;
 using MapsterMapper;
 using System.Reflection;
+using static EmployeeDirectory.Data.Enums;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,7 +27,7 @@ var mapperConfig = new Mapper(typeAdapterConfig);
 builder.Services.AddSingleton<IMapper>(mapperConfig);
 
 builder.Services.ConfigureDbContext(configuration);
-builder.Services.RegisterRepositories();
+builder.Services.RegisterRepositories(OrmType.Dapper);
 builder.Services.RegisterProviders();
 
 
