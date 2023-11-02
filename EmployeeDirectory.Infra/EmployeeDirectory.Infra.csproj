@@ -7,7 +7,23 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="SqlScripts\0001-create-departments.sql" />
+    <None Remove="SqlScripts\0002-create-jobtitles.sql" />
+    <None Remove="SqlScripts\0003-create-offices.sql" />
+    <None Remove="SqlScripts\0004-create-employees.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="SqlScripts\0001-create-departments.sql" />
+    <EmbeddedResource Include="SqlScripts\0004-create-employees.sql" />
+    <EmbeddedResource Include="SqlScripts\0002-create-jobtitles.sql" />
+    <EmbeddedResource Include="SqlScripts\0003-create-offices.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Dapper" Version="2.1.15" />
+    <PackageReference Include="dbup-postgresql" Version="5.0.37" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.13">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
