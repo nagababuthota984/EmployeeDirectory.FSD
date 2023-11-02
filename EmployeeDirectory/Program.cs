@@ -1,5 +1,6 @@
 using EmployeeDirectory.Application.Contracts;
 using EmployeeDirectory.Data.DataConcerns;
+using EmployeeDirectory.Domain.Extensions;
 using EmployeeDirectory.Domain.Providers;
 using EmployeeDirectory.Domain.Repositories;
 using EmployeeDirectory.Infra.Extensions;
@@ -16,6 +17,7 @@ IConfigurationRoot configuration = new ConfigurationBuilder()
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddSingleton(configuration);
 
 //mapster
 var typeAdapterConfig = TypeAdapterConfig.GlobalSettings;
@@ -24,16 +26,9 @@ var mapperConfig = new Mapper(typeAdapterConfig);
 builder.Services.AddSingleton<IMapper>(mapperConfig);
 
 builder.Services.ConfigureDbContext(configuration);
+builder.Services.RegisterRepositories();
+builder.Services.RegisterProviders();
 
-builder.Services.AddScoped<IRepository<Employee>, EmployeeRepository>();
-builder.Services.AddScoped<IRepository<Department>, DepartmentRepository>();
-builder.Services.AddScoped<IRepository<JobTitle>, JobTitleRepository>();
-builder.Services.AddScoped<IRepository<Office>, OfficeRepository>();
-
-builder.Services.AddTransient<IEmployeeProvider, EmployeeProvider>();
-builder.Services.AddTransient<IDepartmentProvider, DepartmentProvider>();
-builder.Services.AddTransient<IOfficeProvider, OfficeProvider>();
-builder.Services.AddTransient<IJobTitleProvider, JobTitleProvider>();
 
 
 var app = builder.Build();
@@ -45,7 +40,7 @@ if (!app.Environment.IsDevelopment())
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
-
+app.UseAuthentication();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 

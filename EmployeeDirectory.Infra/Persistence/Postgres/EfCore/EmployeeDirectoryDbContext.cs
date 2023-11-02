@@ -2,7 +2,7 @@
 using EmployeeDirectory.Data.DataConcerns;
 using Microsoft.EntityFrameworkCore;
 
-namespace EmployeeDirectory.Infra.Persistence.Postgres
+namespace EmployeeDirectory.Infra.Persistence.Postgres.EfCore
 {
     public class EmployeeDirectoryDbContext : DbContext, IApplicationDbContext
     {
